@@ -18,12 +18,12 @@ class CalculationsController < ApplicationController
 
     @word_count = @text.scan(/(\w|-)+/).size
 
-    @occur_count = @text.scan(@special_word)
-    @occurrences = @occur_count.count
-
-    # ================================================================================
-    # Your code goes above.
-    # ================================================================================
+    if @special_word != ''
+      @occur_count = @text.scan(@special_word).size
+      @occurrences = @occur_count
+    else
+      @occurrences = "[ERROR: No special word was input]"
+    end
 
     render("word_count.html.erb")
   end
