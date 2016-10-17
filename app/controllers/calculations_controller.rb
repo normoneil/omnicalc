@@ -12,11 +12,10 @@ class CalculationsController < ApplicationController
 
     @character_count_with_spaces = @text.length
 
-    @text_char_count = @text.gsub(" ", "").length
+    @text_char_count = @text.gsub(" ", "")
     @character_count_without_spaces = @text_char_count.length
 
-    @word_count = @text.split.size
-    # @word_count = @text.scan(/(\w|-)+/).size
+    @word_count = @text.scan(/(\w|-)+/).size
 
     if @special_word != ''
       # @occur_count = @text.scan(@special_word).size
@@ -27,6 +26,10 @@ class CalculationsController < ApplicationController
 
     render("word_count.html.erb")
   end
+
+  # ================================================================================
+  # Your code goes above.
+  # ================================================================================
 
   def loan_payment
     @apr = params[:annual_percentage_rate].to_f
