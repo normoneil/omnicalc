@@ -15,6 +15,7 @@ class CalculationsController < ApplicationController
     @text_char_count = @text.gsub(" ", "")
     @character_count_without_spaces = @text_char_count.length
 
+    # @word_count = @text.split.size
     @word_count = @text.scan(/(\w|-)+/).size
 
     if @special_word != ''
@@ -43,7 +44,14 @@ class CalculationsController < ApplicationController
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    # P = L[c(1 + c)^n]/[(1 + c)n - 1]
+    #  @months = @years * 12
+    #  @rate = @apr / 12000
+    #  @monthly_payment = @principal * (@rate * (1 + @rate)**@months)/((1 + @rate)**@months - 1)
+
+     @rate = (@apr / 1200)
+     @months = (@years * 12)
+     @monthly_payment = ((@rate * @principal) * ((1 + @rate)**@months))/(((1 + @rate)**@months) - 1)
 
     # ================================================================================
     # Your code goes above.
