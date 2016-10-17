@@ -10,17 +10,17 @@ class CalculationsController < ApplicationController
     # The special word the user input is in the string @special_word.
     # ================================================================================
 
-
     @character_count_with_spaces = @text.length
 
-    @text_char_count = @text.gsub(" ", "")
+    @text_char_count = @text.gsub(" ", "").length
     @character_count_without_spaces = @text_char_count.length
 
-    @word_count = @text.scan(/(\w|-)+/).size
+    @word_count = @text.split.size
+    # @word_count = @text.scan(/(\w|-)+/).size
 
     if @special_word != ''
-      @occur_count = @text.scan(@special_word).size
-      @occurrences = @occur_count
+      # @occur_count = @text.scan(@special_word).size
+      @occurrences = @text.scan(@special_word).size
     else
       @occurrences = "[ERROR: No special word was input]"
     end
