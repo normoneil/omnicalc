@@ -154,15 +154,18 @@ class CalculationsController < ApplicationController
     end
     @standard_deviation = stdev(@numbers)
 
-    @sorted_numbers = @numbers.sort
-    @most_common_count = 0
-    @sorted_numbers.each do |num|
-      if @sorted_numbers.count(num) > @most_common_count
-           @most_common_count = @sorted_numbers.count(num)
-           @most_common = num
+    def mode(list_of_numbers)
+      sorted_numbers = list_of_numbers.sort
+      most_common_count = 0
+      sorted_numbers.each do |number|
+        if sorted_numbers.count(number) > most_common_count
+          most_common_count = sorted_numbers.count(number)
+          @most_common = number
+        end
       end
+    return @most_common
     end
-    @mode = @most_common
+    @mode = mode(@numbers)
 
     # ================================================================================
     # Your code goes above.
