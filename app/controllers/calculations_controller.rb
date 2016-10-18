@@ -97,27 +97,66 @@ class CalculationsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer."
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer."
+    @count = @numbers.count
 
-    @minimum = "Replace this string with your answer."
+    @minimum = @numbers.min
 
-    @maximum = "Replace this string with your answer."
+    @maximum = @numbers.max
 
-    @range = "Replace this string with your answer."
+    @range = @numbers.max - @numbers.min
 
-    @median = "Replace this string with your answer."
+    def median(array)
+      array_sorted = array.sort
+      array_length = array_sorted.length
+      (array_sorted[(array_length - 1) / 2] + array_sorted[array_length / 2]) / 2.0
+    end
 
-    @sum = "Replace this string with your answer."
+    @median = median(@numbers)
 
-    @mean = "Replace this string with your answer."
+    # @sum = @numbers.sum
+    def sum(list_of_numbers)
+      running_total = 0
+      list_of_numbers.each do |number|
+        running_total = running_total + number
+      end
+      return running_total
+    end
 
-    @variance = "Replace this string with your answer."
+    @sum = sum(@numbers)
 
-    @standard_deviation = "Replace this string with your answer."
+    # average = @numbers.sum / @numbers.count
+    # @mean = @numbers.sum / @numbers.count
 
-    @mode = "Replace this string with your answer."
+    def mean(list_of_numbers)
+      running_total = 0
+      list_of_numbers.each do |number|
+        running_total = running_total + number
+      end
+      return running_total / list_of_numbers.count
+    end
+    @mean = mean(@numbers)
+
+    def variance(list_of_numbers)
+      sq_diff = 0
+      running_total = 0
+      list_of_numbers.each do |number|
+        sq_diff = (number - (list_of_numbers.sum / list_of_numbers.count))**2
+        running_total = running_total + sq_diff
+      end
+      return running_total / list_of_numbers.count
+    end
+    @variance = variance(@numbers)
+
+    def stdev(list_of_numbers)
+      var = variance(list_of_numbers)
+      return Math.sqrt(var)
+    end
+    @standard_deviation = stdev(@numbers)
+
+    @mode = "?"
+
 
     # ================================================================================
     # Your code goes above.
