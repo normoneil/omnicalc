@@ -17,8 +17,15 @@ class CalculationsController < ApplicationController
     #  @character_count_without_spaces = @text.gsub(" ", "").squish.length
     # @character_count_without_spaces = @text.gsub(/\r\n?/, "").length
 
+    text_without_spaces = @text.gsub(" ",  "")
+    text_without_newlines = text_without_spaces.gsub("\n", "")
+    text_without_carriage_returns = text_without_newlines.gsub("\r", "")
+    text_without_tabs = text_without_carriage_returns.gsub("\t", "")
+
     @character_count_with_spaces = @text.length
-    @character_count_without_spaces = @text.gsub(" ", "").gsub(/\r\n?/, "").squish.length
+
+    text_no_tabs = @text.gsub("\t", "")
+    @character_count_without_spaces = text_no_tabs.gsub(" ", "").gsub(/\r\n?/, "").squish.length
 
     # @word_count = @text.split.size
     @word_count = @text.scan(/(\w|-)+/).size
