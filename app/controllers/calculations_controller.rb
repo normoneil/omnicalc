@@ -107,12 +107,11 @@ class CalculationsController < ApplicationController
 
     @range = @numbers.max - @numbers.min
 
-    def median(array)
-      array_sorted = array.sort
+    def median(list_of_numbers)
+      array_sorted = list_of_numbers.sort
       array_length = array_sorted.length
       (array_sorted[(array_length - 1) / 2] + array_sorted[array_length / 2]) / 2.0
     end
-
     @median = median(@numbers)
 
     # @sum = @numbers.sum
@@ -155,8 +154,15 @@ class CalculationsController < ApplicationController
     end
     @standard_deviation = stdev(@numbers)
 
-    @mode = "?"
-
+    @sorted_numbers = @numbers.sort
+    @most_common_count = 0
+    @sorted_numbers.each do |num|
+      if @sorted_numbers.count(num) > @most_common_count
+           @most_common_count = @sorted_numbers.count(num)
+           @most_common = num
+      end
+    end
+    @mode = @most_common
 
     # ================================================================================
     # Your code goes above.
