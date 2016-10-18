@@ -13,14 +13,17 @@ class CalculationsController < ApplicationController
     @character_count_with_spaces = @text.length
 
     @text_char_count = @text.gsub(" ", "")
-    @character_count_without_spaces = @text_char_count.length
+    @text_char_count_squish = @text_char_count.squish
+    @character_count_without_spaces = @text_char_count_squish.length
 
     # @word_count = @text.split.size
     @word_count = @text.scan(/(\w|-)+/).size
 
     if @special_word != ''
       # @occur_count = @text.scan(@special_word).size
-      @occurrences = @text.scan(@special_word).size
+      mod_text = @text.downcase
+      mod_special_word = @special_word.downcase
+      @occurrences = mod_text.scan(mod_special_word).size
     else
       @occurrences = "[ERROR: No special word was input]"
     end
